@@ -98,12 +98,6 @@ def generate_repeat_video(video_path,
 
     result = concat_lists([padding_s, clip_repeat, clip, padding_e])
 
-    for frame in clip:
-        cv2.imshow('clip', frame)
-        cv2.waitKey(30)
-
-    cv2.waitKey()
-
     for frame in result:
         cv2.imshow('result', frame)
         cv2.waitKey(30)
