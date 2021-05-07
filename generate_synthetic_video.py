@@ -13,7 +13,6 @@ def generate_repeat_with_various_speed(array,
     
     repeat_num = random.randint(*repeat_num_range)
 
-    print(repeat_num)
     results = []
     for _ in range(repeat_num):
         speed_x = random.uniform(*repeat_speed_x_range)
