@@ -1,4 +1,5 @@
 import itertools
+import os
 import random
 
 import cv2
@@ -47,6 +48,7 @@ def generate_repeat_video(video_path,
                           output_fps=30,
                           video_size_wh=(224, 224),
                           generate_num=3,
+                          output_dir='result/'):
 
     """
     1. 영상 읽기
@@ -65,6 +67,8 @@ def generate_repeat_video(video_path,
     fps = cap.get(cv2.CAP_PROP_FPS)
     frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
     
+    os.makedirs(output_dir, exist_ok=True)
+    video_name = os.path.splitext(os.path.basename(video_path))[0]
 
     error_count = 0
     for i in range(generate_num):
@@ -107,10 +111,15 @@ def generate_repeat_video(video_path,
 
         result = concat_lists([padding_s, clip_repeat, clip, padding_e])
 
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        
+        video_out_path = os.path.join(output_dir, f'{video_name}_{i}.mp4')
+        out = cv2.VideoWriter(video_out_path, fourcc, output_fps, video_size_wh)
 
-    for frame in result:
-        cv2.imshow('result', frame)
-        cv2.waitKey(30)
+        for frame in result:
+            out.write(frame)
+
+        out.release()
 
 if __name__ == '__main__':
     generate_repeat_video(
@@ -122,4 +131,5 @@ if __name__ == '__main__':
         output_fps=30,
         video_size_wh=(854, 480),
         generate_num=3,
+        output_dir='result/'
     )
