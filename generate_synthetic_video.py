@@ -123,11 +123,11 @@ def generate_repeat_video(video_path,
 
 if __name__ == '__main__':
     generate_repeat_video(
-        video_path='run.mp4',
-        clip_sec_range=(0.1, 1),
-        padding_sec_range=(0, 2),
-        repeat_num_range=(2, 3),
-        repeat_speed_x_range=(0.8, 1.2),
+        video_path='sample_video/run.mp4',
+        clip_sec_range=(1, 1.5),
+        padding_sec_range=(0, 1),
+        repeat_num_range=(2, 5),
+        repeat_speed_x_range=(0.7, 1.3),
         output_fps=30,
         video_size_wh=(854, 480),
         generate_num=3,
